@@ -1,0 +1,24 @@
+<table border="1">
+  <thead></thead>
+  <tr>
+    <th>Czas akcji</th>
+    <th>Kwota</th>
+    <th>Saldo przed</th>
+    <th>Saldo po</th>
+    <th>Typ opracji</th>
+    <th>Odbiorca</th>
+    <th>Tytuł</th>
+  </tr>
+
+  <tbody>
+    <tr *ngFor="let transaction of transactions">
+      <td>{{transaction.actionTime}}</td>
+      <td>{{transaction.amount}}</td>
+      <td>{{transaction.balanceBefore}}</td>
+      <td>{{transaction.balanceAfter}}</td>
+      <td>{{transaction.operationType}}</td>
+      <td>{{transaction.recipient}}</td>
+      <td>{{transaction.title}}</td>
+    </tr>
+  </tbody>
+</table>

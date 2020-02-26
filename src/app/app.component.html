@@ -6,7 +6,11 @@
 <!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
+<nav>
+  <a routerLink="/transactions-history" *ngIf="accountStorage.isLoggedIn()">Historia transakcji</a>
+  <a routerLink="/login" *ngIf="!accountStorage.isLoggedIn()">Zaloguj sie</a>
+  <a routerLink="/transfer" *ngIf="accountStorage.isLoggedIn()">Wykonaj przelew</a>
+</nav>
 <router-outlet></router-outlet>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

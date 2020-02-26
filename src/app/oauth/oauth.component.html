@@ -1,0 +1,12 @@
+<p>oauth works!</p>
+
+Logowanie
+<form>
+  Login
+  <input type="text" [(ngModel)]="user.login" [ngModelOptions]="{standalone: true}">
+
+  Hasło
+  <input type="text" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}">
+
+  <button (click)="login()">Zaloguj się</button>
+</form>
