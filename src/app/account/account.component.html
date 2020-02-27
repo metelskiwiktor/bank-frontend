@@ -3,22 +3,20 @@
   <tr>
     <th>Czas akcji</th>
     <th>Kwota</th>
-    <th>Saldo przed</th>
-    <th>Saldo po</th>
-    <th>Typ opracji</th>
-    <th>Odbiorca</th>
+    <th>Saldo</th>
+    <th>Typ operacji</th>
     <th>Tytuł</th>
+    <th>Odbiorca/Nadawca</th>
   </tr>
 
   <tbody>
     <tr *ngFor="let transaction of transactions">
       <td>{{transaction.actionTime}}</td>
       <td>{{transaction.amount}}</td>
-      <td>{{transaction.balanceBefore}}</td>
       <td>{{transaction.balanceAfter}}</td>
       <td>{{transaction.operationType}}</td>
-      <td>{{transaction.recipient}}</td>
       <td>{{transaction.title}}</td>
+      <td>{{transaction.fromTo}}</td>
     </tr>
   </tbody>
 </table>

@@ -1,0 +1,10 @@
+<form>
+  Kwota:
+  <input type="text" [(ngModel)]="transaction.amount" [ngModelOptions]="{standalone: true}">
+  Tytuł:
+  <input type="text" [(ngModel)]="transaction.title" [ngModelOptions]="{standalone: true}">
+  Odbiorca:
+  <input type="text" [(ngModel)]="transaction.recipientAccountNumber" (ended)="setRecipientBranch()" [ngModelOptions]="{standalone: true}">
+  <button (click)="createTransaction()">Wykonaj przelew</button>
+</form>
+<p *ngIf="isRecipientAccountNumber()">{{getRecipientBranch()}}</p>

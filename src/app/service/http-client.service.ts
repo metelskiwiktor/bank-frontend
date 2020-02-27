@@ -18,7 +18,8 @@ export class HttpClientService {
 
   public createTransaction(transaction: TransactionTransfer) {
     const tokenValue = this.accountStorage.getTokenValue();
-    this.httpClient.post('http://localhost:8090/transfer', transaction, {headers: {tokenValue}});
+    this.httpClient.post('http://localhost:8090/transaction/transfer', transaction, {headers: {tokenValue}}).subscribe(value => {
+    });
   }
 
   public getTransactions() {
@@ -40,12 +41,16 @@ export class HttpClientService {
 
   public getBranchByAccountNumber(accountNumber: string): string {
     let branch;
-    this.httpClient.get<string>('http://localhost:8090/bank-administration/' + accountNumber + '/branch').subscribe(value => branch = value);
+    this.httpClient.get('http://localhost:8090/bank-administration/' + accountNumber + '/branch', {responseType: 'text'}).subscribe(value => branch = value);
     return branch;
   }
 
   public getAccountDetails(): Observable<Details> {
     const tokenValue = this.accountStorage.getTokenValue();
-    return this.httpClient.get<Details>('http://localhost:8090/account/details', {headers: {tokenValue}});
+    const http = this.httpClient.get<Details>('http://localhost:8090/account/details', {headers: {tokenValue}});
+    http.subscribe(value => {
+      this.accountStorage.setAccountDetails(value.balance, value.accountNumber);
+    });
+    return http;
   }
 }
