@@ -13,7 +13,6 @@ import {Router} from '@angular/router';
 export class TransferComponent implements OnInit {
 
   transaction: TransactionTransfer = new TransactionTransfer();
-  recipientAccountNumber: string;
   recipientBranch: string;
 
   constructor(private httpClientService: HttpClientService, private accountStorage: AccountStorage, private route: Router) {
@@ -26,13 +25,12 @@ export class TransferComponent implements OnInit {
   createTransaction() {
     this.transaction.senderBalance = this.accountStorage.getBalance();
     this.transaction.senderAccountNumber = this.accountStorage.getAccountNumber();
-    this.transaction.operationType = 'TRANSFER';
     this.httpClientService.createTransaction(this.transaction);
     this.route.navigateByUrl('/transactions-history');
   }
 
   isRecipientAccountNumber(): boolean {
-    return this.recipientAccountNumber != null;
+    return this.transaction.recipientAccountNumber != null;
   }
 
   getRecipientBranch(): string {
@@ -40,8 +38,11 @@ export class TransferComponent implements OnInit {
   }
 
   setRecipientBranch() {
-    if (this.transaction.recipientAccountNumber != null) {
-      this.recipientBranch = this.httpClientService.getBranchByAccountNumber(this.transaction.recipientAccountNumber);
+    console.log('change');
+    if (this.isRecipientAccountNumber()) {
+      this.httpClientService.getBranchByAccountNumber(this.transaction.recipientAccountNumber).subscribe(value => {
+        this.recipientBranch = value;
+      });
     }
   }
 }

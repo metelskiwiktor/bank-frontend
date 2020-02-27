@@ -39,10 +39,8 @@ export class HttpClientService {
     this.httpClient.get('http://localhost:8090/oauth/logout', {headers: {tokenValue}});
   }
 
-  public getBranchByAccountNumber(accountNumber: string): string {
-    let branch;
-    this.httpClient.get('http://localhost:8090/bank-administration/' + accountNumber + '/branch', {responseType: 'text'}).subscribe(value => branch = value);
-    return branch;
+  public getBranchByAccountNumber(accountNumber: string) {
+    return this.httpClient.get('http://localhost:8090/bank-administration/' + accountNumber + '/branch', {responseType: 'text'});
   }
 
   public getAccountDetails(): Observable<Details> {
