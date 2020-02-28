@@ -29,4 +29,13 @@ export class AccountStorage {
   public getBalance() {
     return localStorage.getItem('balance');
   }
+
+  public logout() {
+    localStorage.setItem('tokenValue', '');
+    localStorage.setItem('balance', '');
+    localStorage.setItem('accountNumber', '');
+    localStorage.removeItem('tokenValue');
+    localStorage.removeItem('balance');
+    localStorage.removeItem('accountNumber');
+  }
 }

@@ -6,12 +6,12 @@ import {Login} from '../model/request/Login';
 import {Observable} from 'rxjs';
 import {AccountStorage} from './account-storage';
 import {Details} from '../model/Details';
+import {TransactionTransferSelf} from '../model/request/TransactionTransferSelf';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpClientService {
-
 
   constructor(private httpClient: HttpClient, private accountStorage: AccountStorage) {
   }
@@ -22,21 +22,25 @@ export class HttpClientService {
     });
   }
 
+  public createTransactionSelf(transaction: TransactionTransferSelf, operationType: string) {
+    const tokenValue = this.accountStorage.getTokenValue();
+    this.httpClient.post('http://localhost:8090/transaction/' + operationType, transaction, {headers: {tokenValue}}).subscribe(value => {
+    });
+  }
+
   public getTransactions() {
     const tokenValue = this.accountStorage.getTokenValue();
     return this.httpClient.get<TransactionTransferResponse[]>('http://localhost:8090/account/transactions-history', {headers: {tokenValue}});
   }
 
   public login(login: Login) {
-    this.httpClient.post('http://localhost:8090/oauth/login', login, {responseType: 'text'}).subscribe(value => {
-        this.accountStorage.setTokenValue(value);
-      }
-    );
+    return this.httpClient.post('http://localhost:8090/oauth/login', login, {responseType: 'text'});
   }
 
   public logout() {
     const tokenValue = this.accountStorage.getTokenValue();
     this.httpClient.get('http://localhost:8090/oauth/logout', {headers: {tokenValue}});
+    this.accountStorage.logout();
   }
 
   public getBranchByAccountNumber(accountNumber: string) {

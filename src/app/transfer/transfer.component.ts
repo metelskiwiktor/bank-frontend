@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {TransactionTransfer} from '../model/request/TransactionTransfer';
 import {Details} from '../model/Details';
 import {HttpClientService} from '../service/http-client.service';
@@ -15,11 +15,11 @@ export class TransferComponent implements OnInit {
   transaction: TransactionTransfer = new TransactionTransfer();
   recipientBranch: string;
 
-  constructor(private httpClientService: HttpClientService, private accountStorage: AccountStorage, private route: Router) {
+  constructor(private httpClientService: HttpClientService, private accountStorage: AccountStorage, private route: Router, private zone: NgZone) {
+    this.httpClientService.getAccountDetails();
   }
 
   ngOnInit(): void {
-    this.httpClientService.getAccountDetails();
   }
 
   createTransaction() {
@@ -38,7 +38,6 @@ export class TransferComponent implements OnInit {
   }
 
   setRecipientBranch() {
-    console.log('change');
     if (this.isRecipientAccountNumber()) {
       this.httpClientService.getBranchByAccountNumber(this.transaction.recipientAccountNumber).subscribe(value => {
         this.recipientBranch = value;
