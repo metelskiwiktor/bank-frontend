@@ -6,7 +6,7 @@ import {Login} from '../model/request/Login';
 import {Observable} from 'rxjs';
 import {AccountStorage} from './account-storage';
 import {Details} from '../model/Details';
-import {TransactionTransferSelf} from '../model/request/TransactionTransferSelf';
+import {Client} from '../model/Client';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +19,6 @@ export class HttpClientService {
   public createTransaction(transaction: TransactionTransfer) {
     const tokenValue = this.accountStorage.getTokenValue();
     this.httpClient.post('http://localhost:8090/transaction/transfer', transaction, {headers: {tokenValue}}).subscribe(value => {
-    });
-  }
-
-  public createTransactionSelf(transaction: TransactionTransferSelf, operationType: string) {
-    const tokenValue = this.accountStorage.getTokenValue();
-    this.httpClient.post('http://localhost:8090/transaction/' + operationType, transaction, {headers: {tokenValue}}).subscribe(value => {
     });
   }
 

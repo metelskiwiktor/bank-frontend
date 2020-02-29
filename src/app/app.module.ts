@@ -8,7 +8,6 @@ import { AccountComponent } from './account/account.component';
 import {AppRoutingModule} from './app-routing.module';
 import { OauthComponent } from './oauth/oauth.component';
 import {FormsModule} from '@angular/forms';
-import { TransferselfComponent } from './transferself/transferself.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +15,6 @@ import { TransferselfComponent } from './transferself/transferself.component';
     TransferComponent,
     AccountComponent,
     OauthComponent,
-    TransferselfComponent,
   ],
   imports: [
     BrowserModule,

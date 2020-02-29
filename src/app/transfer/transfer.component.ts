@@ -4,6 +4,7 @@ import {Details} from '../model/Details';
 import {HttpClientService} from '../service/http-client.service';
 import {AccountStorage} from '../service/account-storage';
 import {Router} from '@angular/router';
+import {split} from 'ts-node';
 
 @Component({
   selector: 'app-transfer',

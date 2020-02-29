@@ -10,7 +10,6 @@
   <a routerLink="/login" *ngIf="!accountStorage.isLoggedIn()">Zaloguj sie</a>
   <a routerLink="/transactions-history" *ngIf="accountStorage.isLoggedIn()">Historia transakcji</a>
   <a routerLink="/transfer" *ngIf="accountStorage.isLoggedIn()">Wykonaj przelew</a>
-  <a routerLink="/transfer-self" *ngIf="accountStorage.isLoggedIn()">Wykonaj wpłatę/wypłatę</a>
   <a routerLink="/logout" (click)="ouath.logout()" *ngIf="accountStorage.isLoggedIn()">Wyloguj się</a>
 </nav>
 <router-outlet></router-outlet>
