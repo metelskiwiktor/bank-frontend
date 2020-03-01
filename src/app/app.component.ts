@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {AccountStorage} from './service/account-storage';
 import {OauthComponent} from './oauth/oauth.component';
+import {HttpClientService} from './service/http-client.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,13 @@ import {OauthComponent} from './oauth/oauth.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(public accountStorage: AccountStorage, public ouath: OauthComponent) {
+  accountNumber: string;
+  balance: string;
+
+  constructor(public accountStorage: AccountStorage, public ouath: OauthComponent, private httpClientService: HttpClientService) {
+    this.httpClientService.getAccountDetails().subscribe(value => {
+      this.accountNumber = value.accountNumber;
+      this.balance = value.balance;
+    });
   }
 }

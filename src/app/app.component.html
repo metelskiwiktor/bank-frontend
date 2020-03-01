@@ -6,6 +6,7 @@
 <!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<p *ngIf="accountStorage.isLoggedIn()">Saldo: {{accountStorage.getBalance()}}</p>
 <nav>
   <a routerLink="/login" *ngIf="!accountStorage.isLoggedIn()">Zaloguj sie</a>
   <a routerLink="/transactions-history" *ngIf="accountStorage.isLoggedIn()">Historia transakcji</a>

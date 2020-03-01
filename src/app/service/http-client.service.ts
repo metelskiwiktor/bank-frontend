@@ -28,6 +28,7 @@ export class HttpClientService {
   }
 
   public login(login: Login) {
+    login.client = Client.WEB;
     return this.httpClient.post('http://localhost:8090/oauth/login', login, {responseType: 'text'});
   }
 
